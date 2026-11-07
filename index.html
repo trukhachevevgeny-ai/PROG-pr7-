@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Алгоритмы и программирование. Урок для школьников</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Анимированный фон -->
+    <div class="bg-gradient"></div>
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-mark">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <span class="logo-text">Алгоритмы<em>Программирование</em></span>
+            </a>
+
+            <div class="header-actions">
+                
+            </div>
+        </div>
+    </header>
+
+    <!-- Навигация -->
+    <nav class="navigation">
+        <div class="container nav-inner">
+            <ul class="nav-menu">
+    <li><a href="index.html" class="nav-link active">Главная</a></li>
+    <li><a href="vvod.html" class="nav-link">Ввод и вывод</a></li>
+    <li><a href="yslovia.html" class="nav-link">Условия</a></li>
+    <li><a href="cicili.html" class="nav-link">Циклы</a></li>
+    <li><a href="recyrsia.html" class="nav-link">Рекурсия</a></li>
+    <li><button class="theme-btn" id="themeBtn">🌙 Тёмная тема</button></li>
+</ul>
+        </div>
+    </nav>
+
+    <!-- Основной контент -->
+    <main class="main">
+        <div class="container">
+
+            <!-- Hero -->
+            <section class="hero">
+                <h1 class="hero-title">
+                    Тема урока:<br>
+                    <span class="gradient-text">Алгоритмы и программирование</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Алгоритм — это точная последовательность понятных шагов и инструкций, 
+                    которая приводит к решению конкретной задачи или получению заданного 
+                    результата.
+                </p>
+                <div class="hero-actions">
+                    <form action="vvod.html"><button class="btn btn-primary btn-lg">
+                        Начать
+                        <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+                            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button></form>
+                </div>
+
+</section>
+            <!-- Обсуждения -->
+            <section class="section">
+                <div class="section-head">
+                    <h2 class="section-title"><span class="gradient-text">Об алгоритмах</span></h2>
+                </div>
+                    <!-- Форма добавления новой статьи -->
+<form id="addArticleForm" class="article-form">
+    <h3>Добавить новую публикацию</h3>
+
+    <div class="form-group">
+        <label for="postTitle">Заголовок статьи:</label>
+        <input type="text" id="postTitle" required placeholder="Например: Что такое алгоритм">
+    </div>
+
+    <div class="form-group">
+        <label for="postText">Текст статьи:</label>
+        <textarea id="postText" rows="4" required placeholder="Опишите тему..."></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="postTags">Теги (через пробел):</label>
+        <input type="text" id="postTags" placeholder="Например: #алгоритм #python">
+    </div>
+
+    <button type="submit" class="submit-btn">Опубликовать статью</button>
+</form>
+                                <!-- Поле живого поиска -->
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Введите название или тег статьи для поиска...">
+                </div>
+
+                <!-- В этот пустой контейнер JavaScript будет вставлять наши статьи -->
+                <div id="postsContainer" class="discussions-list"></div>
+                            </section>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="logo-mark">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">Алгоритмы<em>Программирование</em></span>
+                    </div>
+                    <p>Урок информатики для школьников</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><a href="vvod.html">Ввод и вывод</a></li>
+                        <li><a href="yslovia.html">Условия</a></li>
+                        <li><a href="cicili.html">Циклы</a></li>
+                        <li><a href="recyrsia.html">Рекурсия</a></li>
+                        <li><a href="vidi.html">Виды алгоритмических конструкций</a></li>
+                        <li><a href="metodi.html">Методы разработки алгоритмов</a></li>
+                        <li><a href="prog.html">Программы и ПО</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Контакты</h4>
+                    <ul>
+                         <li><a href="#">MAX</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Анимация счётчиков
+        const counters = document.querySelectorAll('.stat-value');
+        const animateCount = (el, target) => {
+            const duration = 1500;
+            const start = performance.now();
+            const step = (now) => {
+                const progress = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                el.textContent = Math.floor(eased * target).toLocaleString('ru-RU');
+                if (progress < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    animateCount(el, parseInt(el.dataset.count));
+                    observer.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(c => observer.observe(c));
+    </script>
+<script src="script.js"></script>
+</body>
+</html>

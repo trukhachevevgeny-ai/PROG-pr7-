@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Алгоритмы и программирование. Урок для школьников</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ============================================================
+           СТИЛИ ТОЛЬКО ДЛЯ ЭТОЙ СТРАНИЦЫ
+           ============================================================ */
+
+        .lesson-title {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-size: clamp(26px, 4vw, 44px);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            text-align: center;
+            margin-bottom: 14px;
+            background: linear-gradient(135deg, #ffffff 20%, #a4a4c0 90%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .lesson-subtitle {
+            color: #8b8b9e;
+            text-align: center;
+            max-width: 640px;
+            margin: 0 auto 56px;
+            font-size: 15px;
+            line-height: 1.65;
+        }
+
+        /* -------- Секция -------- */
+        .vidi-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            align-items: center;
+            padding: 32px;
+            margin-bottom: 32px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.35),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .vidi-section.reverse .vidi-text { order: 2; }
+        .vidi-section.reverse .vidi-pic  { order: 1; }
+
+        .vidi-text h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(22px, 2.6vw, 30px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 14px;
+        }
+
+        .vidi-text h2 .accent {
+            background: linear-gradient(135deg, #7c5cff, #00d4ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .vidi-text p {
+            color: #b8b8c8;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+
+        .vidi-text ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .vidi-text ul li {
+            position: relative;
+            padding-left: 22px;
+            margin-bottom: 8px;
+            color: #8b8b9e;
+            font-size: 14px;
+        }
+
+        .vidi-text ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7c5cff, #00d4ff);
+            box-shadow: 0 0 12px rgba(124, 92, 255, 0.6);
+        }
+
+        /* -------- Картинка (схема) -------- */
+        .vidi-pic {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            min-height: 260px;
+        }
+
+        /* ---------- СХЕМА 1: Разделяй и властвуй ---------- */
+        .dac {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .dac .top {
+            padding: 10px 20px;
+            background: rgba(124, 92, 255, 0.10);
+            border: 2px solid rgba(124, 92, 255, 0.5);
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #e0e0f0;
+            box-shadow: 0 6px 20px rgba(124, 92, 255, 0.15);
+        }
+
+        .dac .split {
+            display: flex;
+            gap: 18px;
+            position: relative;
+        }
+
+        .dac .split::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            width: 1px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .dac .mid {
+            width: 110px;
+            padding: 10px;
+            background: rgba(0, 212, 255, 0.08);
+            border: 2px solid rgba(0, 212, 255, 0.5);
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            color: #e0e0f0;
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.12);
+        }
+
+        .dac .bottom-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .dac .small {
+            padding: 6px 10px;
+            font-size: 11px;
+            background: rgba(0, 255, 163, 0.08);
+            border: 1px solid rgba(0, 255, 163, 0.45);
+            border-radius: 8px;
+            color: #b8ffd8;
+            font-weight: 600;
+        }
+
+        /* ---------- СХЕМА 2: Жадный алгоритм ---------- */
+        .greedy {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-family: 'Space Grotesk', sans-serif;
+            width: 100%;
+            max-width: 260px;
+        }
+
+        .greedy-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 184, 0, 0.5);
+            background: rgba(255, 184, 0, 0.06);
+            font-size: 12px;
+            font-weight: 600;
+            color: #e0e0f0;
+            position: relative;
+        }
+
+        .greedy-item.chosen {
+            border-color: rgba(0, 255, 163, 0.6);
+            background: rgba(0, 255, 163, 0.08);
+            box-shadow: 0 6px 20px rgba(0, 255, 163, 0.15);
+        }
+
+        .greedy-item .val {
+            color: #ffb800;
+            font-weight: 700;
+        }
+        .greedy-item.chosen .val { color: #00ffa3; }
+
+        .greedy-item .check {
+            font-size: 14px;
+        }
+
+        /* ---------- СХЕМА 3: Динамическое программирование ---------- */
+        .dp {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .dp-row {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+        }
+
+        .dp-cell {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            background: rgba(255, 107, 203, 0.06);
+            border: 2px solid rgba(255, 107, 203, 0.35);
+            border-radius: 8px;
+            color: #e0e0f0;
+            transition: all 0.2s ease;
+        }
+
+        .dp-cell.base {
+            background: rgba(0, 212, 255, 0.10);
+            border-color: rgba(0, 212, 255, 0.55);
+            color: #9ae6ff;
+        }
+
+        .dp-cell.result {
+            background: rgba(0, 255, 163, 0.10);
+            border-color: rgba(0, 255, 163, 0.6);
+            color: #b8ffd8;
+            box-shadow: 0 6px 20px rgba(0, 255, 163, 0.2);
+        }
+
+        .dp-caption {
+            font-size: 11px;
+            color: #8b8b9e;
+            margin-top: 10px;
+            text-align: center;
+            letter-spacing: 0.04em;
+        }
+
+        /* ---------- СХЕМА 4: Перебор ---------- */
+        .brute {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-family: 'Space Grotesk', sans-serif;
+            width: 100%;
+            max-width: 260px;
+        }
+
+        .brute-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 12px;
+            color: #8b8b9e;
+        }
+
+        .brute-row.win {
+            border-color: rgba(0, 255, 163, 0.5);
+            background: rgba(0, 255, 163, 0.06);
+            color: #b8ffd8;
+            font-weight: 700;
+        }
+
+        .brute-row .num {
+            width: 22px;
+            height: 22px;
+            display: grid;
+            place-items: center;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.06);
+            font-size: 11px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .brute-row.win .num {
+            background: rgba(0, 255, 163, 0.25);
+            color: #00ffa3;
+        }
+
+        /* -------- Итог -------- */
+        .summary {
+            margin-top: 40px;
+            padding: 32px;
+            background: linear-gradient(135deg, rgba(124, 92, 255, 0.10), rgba(0, 212, 255, 0.06));
+            border: 1px solid rgba(124, 92, 255, 0.25);
+            border-radius: 24px;
+            text-align: center;
+        }
+        .summary h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+        .summary p {
+            color: #b8b8c8;
+            font-size: 15px;
+            line-height: 1.7;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        /* -------- Таблица сравнения -------- */
+        .compare {
+            margin-top: 40px;
+            padding: 32px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            overflow-x: auto;
+        }
+        .compare h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .compare table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .compare th,
+        .compare td {
+            padding: 12px 14px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .compare th {
+            color: #8b8b9e;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .compare td {
+            color: #c8c8d8;
+        }
+        .compare tr:last-child td { border-bottom: none; }
+
+        /* -------- Адаптив -------- */
+        @media (max-width: 820px) {
+            .vidi-section {
+                grid-template-columns: 1fr;
+                padding: 24px;
+            }
+            .vidi-section.reverse .vidi-text { order: 1; }
+            .vidi-section.reverse .vidi-pic  { order: 2; }
+            .vidi-pic { min-height: 220px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Анимированный фон -->
+    <div class="bg-gradient"></div>
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-mark">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <span class="logo-text">Алгоритмы<em>Программирование</em></span>
+            </a>
+
+            <div class="header-actions">
+                
+            </div>
+        </div>
+    </header>
+
+    <!-- Навигация -->
+    <nav class="navigation">
+        <div class="container nav-inner">
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Главная</a></li>
+                <li><a href="vvod.html" class="nav-link">Ввод и вывод</a></li>
+                <li><a href="yslovia.html" class="nav-link">Условия</a></li>
+                <li><a href="cicili.html" class="nav-link">Циклы</a></li>
+                <li><a href="recyrsia.html" class="nav-link">Рекурсия</a></li>
+                <li><button class="theme-btn" id="themeBtn">🌙 Тёмная тема</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Основной контент -->
+    <main class="main">
+        <div class="container">
+
+             <h1 class="lesson-title">Методы разработки алгоритмов</h1>
+            <p class="lesson-subtitle">
+                Когда задача сложнее, чем «прочитать число и вывести его обратно»,
+                на помощь приходят специальные подходы. Вот четыре самых
+                известных метода, которые используют программисты.
+            </p>
+
+            <!-- ============ 1. РАЗДЕЛЯЙ И ВЛАСТВУЙ ============ -->
+            <section class="vidi-section">
+                <div class="vidi-text">
+                    <h2>1. Разделяй и властвуй — <span class="accent">декомпозиция</span></h2>
+                    <p>
+                        Большую задачу разбивают на несколько меньших, каждую
+                        решают отдельно, а результаты собирают вместе. Если
+                        маленькая задача всё ещё велика — её делят снова.
+                    </p>
+                    <ul>
+                        <li>Классика: сортировка слиянием, быстрая сортировка</li>
+                        <li>Каждая часть решается независимо</li>
+                        <li>Итог собирается из результатов частей</li>
+                    </ul>
+                </div>
+                <div class="vidi-pic">
+                    <div class="dac">
+                        <div class="top">Задача целиком</div>
+                        <div class="split">
+                            <div class="mid">Часть A</div>
+                            <div class="mid">Часть B</div>
+                        </div>
+                        <div class="bottom-row">
+                            <div class="small">A1</div>
+                            <div class="small">A2</div>
+                            <div class="small">B1</div>
+                            <div class="small">B2</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ 2. ЖАДНЫЙ АЛГОРИТМ ============ -->
+            <section class="vidi-section reverse">
+                <div class="vidi-text">
+                    <h2>2. Жадный алгоритм — <span class="accent">лучшее сейчас</span></h2>
+                    <p>
+                        На каждом шаге выбирается самое выгодное действие
+                        <b>в данный момент</b>, без оглядки на будущее. Такой
+                        подход быстр, но не всегда даёт оптимальный результат.
+                    </p>
+                    <ul>
+                        <li>Простой и быстрый</li>
+                        <li>Подходит для задач с «жадной» структурой</li>
+                        <li>Пример: выдача сдачи минимальным числом монет</li>
+                    </ul>
+                </div>
+                <div class="vidi-pic">
+                    <div class="greedy">
+                        <div class="greedy-item chosen">
+                            <span>Монета 10</span>
+                            <span class="val">10</span>
+                        </div>
+                        <div class="greedy-item chosen">
+                            <span>Монета 10</span>
+                            <span class="val">10</span>
+                        </div>
+                        <div class="greedy-item chosen">
+                            <span>Монета 5</span>
+                            <span class="val">5</span>
+                        </div>
+                        <div class="greedy-item">
+                            <span>Монета 2</span>
+                            <span class="val">2</span>
+                        </div>
+                        <div class="greedy-item">
+                            <span>Монета 1</span>
+                            <span class="val">1</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ 3. ДИНАМИЧЕСКОЕ ПРОГРАММИРОВАНИЕ ============ -->
+            <section class="vidi-section">
+                <div class="vidi-text">
+                    <h2>3. Динамическое программирование — <span class="accent">таблица решений</span></h2>
+                    <p>
+                        Сложная задача решается через таблицу: сначала
+                        заполняются простые случаи, а потом из них
+                        «собираются» решения для более сложных.
+                    </p>
+                    <ul>
+                        <li>Каждое значение вычисляется один раз</li>
+                        <li>Результаты сохраняются в таблице (массиве)</li>
+                        <li>Пример: числа Фибоначчи, задача о рюкзаке</li>
+                    </ul>
+                </div>
+                <div class="vidi-pic">
+                    <div class="dp">
+                        <div class="dp-row">
+                            <div class="dp-cell base">1</div>
+                            <div class="dp-cell base">1</div>
+                            <div class="dp-cell">2</div>
+                            <div class="dp-cell">3</div>
+                            <div class="dp-cell">5</div>
+                            <div class="dp-cell result">8</div>
+                        </div>
+                        <div class="dp-caption">Числа Фибоначчи: каждое = сумма двух предыдущих</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ 4. ПЕРЕБОР ============ -->
+            <section class="vidi-section reverse">
+                <div class="vidi-text">
+                    <h2>4. Полный перебор — <span class="accent">проверка всего</span></h2>
+                    <p>
+                        Самый прямолинейный метод: перебрать <b>все</b>
+                        возможные варианты и выбрать тот, что подходит
+                        по условию. Работает всегда, но может быть очень
+                        долгим.
+                    </p>
+                    <ul>
+                        <li>Гарантированно находит решение, если оно есть</li>
+                        <li>Медленный при большом числе вариантов</li>
+                        <li>Пример: подбор пароля, задача коммивояжёра (малые размеры)</li>
+                    </ul>
+                </div>
+                <div class="vidi-pic">
+                    <div class="brute">
+                        <div class="brute-row">
+                            <span class="num">1</span>
+                            <span>Вариант 1</span>
+                        </div>
+                        <div class="brute-row">
+                            <span class="num">2</span>
+                            <span>Вариант 2</span>
+                        </div>
+                        <div class="brute-row win">
+                            <span class="num">3</span>
+                            <span>Вариант 3 — подходит ✓</span>
+                        </div>
+                        <div class="brute-row">
+                            <span class="num">4</span>
+                            <span>Вариант 4</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ ТАБЛИЦА СРАВНЕНИЯ ============ -->
+            <div class="compare">
+                <h3>Какой метод выбрать?</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Метод</th>
+                            <th>Скорость</th>
+                            <th>Точность</th>
+                            <th>Когда применять</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Разделяй и властвуй</td>
+                            <td>Быстро</td>
+                            <td>Точный</td>
+                            <td>Задача хорошо делится на части</td>
+                        </tr>
+                        <tr>
+                            <td>Жадный</td>
+                            <td>Очень быстро</td>
+                            <td>Не всегда оптимальный</td>
+                            <td>Есть «жадная» структура задачи</td>
+                        </tr>
+                        <tr>
+                            <td>Динамическое программирование</td>
+                            <td>Средне</td>
+                            <td>Точный</td>
+                            <td>Много повторяющихся подзадач</td>
+                        </tr>
+                        <tr>
+                            <td>Полный перебор</td>
+                            <td>Медленно</td>
+                            <td>Точный</td>
+                            <td>Вариантов мало или нужен гарантированный ответ</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ============ ИТОГ ============ -->
+            <div class="summary">
+                <h3>Один метод — не панацея</h3>
+                <p>
+                    Опытный программист смотрит на задачу и выбирает метод
+                    под неё. Иногда одну и ту же задачу можно решить
+                    и жадным способом, и перебором, и динамикой — но
+                    один из них окажется в разы быстрее.
+                </p>
+            </div>
+
+
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="logo-mark">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">Алгоритмы<em>Программирование</em></span>
+                    </div>
+                    <p>Урок информатики для школьников</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><a href="vvod.html">Ввод и вывод</a></li>
+                        <li><a href="yslovia.html">Условия</a></li>
+                        <li><a href="cicili.html">Циклы</a></li>
+                        <li><a href="recyrsia.html">Рекурсия</a></li>
+                        <li><a href="vidi.html">Виды алгоритмических конструкций</a></li>
+                        <li><a href="metodi.html">Методы разработки алгоритмов</a></li>
+                        <li><a href="prog.html">Программы и ПО</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Контакты</h4>
+                    <ul>
+                        <li><a href="#">MAX</a></li>
+                    </ul>
+                </div>
+        </div>
+    </footer>
+
+    <script>
+        // Анимация счётчиков
+        const counters = document.querySelectorAll('.stat-value');
+        const animateCount = (el, target) => {
+            const duration = 1500;
+            const start = performance.now();
+            const step = (now) => {
+                const progress = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                el.textContent = Math.floor(eased * target).toLocaleString('ru-RU');
+                if (progress < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    animateCount(el, parseInt(el.dataset.count));
+                    observer.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(c => observer.observe(c));
+    </script>
+<script src="script.js"></script>
+</body>
+</html>

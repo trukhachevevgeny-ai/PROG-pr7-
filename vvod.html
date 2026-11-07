@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Алгоритмы и программирование. Урок для школьников</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+      /* ---- Рамка с кодом в стиле playground ---- */
+.code-frame {
+    position: relative;
+    max-width: 620px;
+    margin: 40px auto 32px;
+    padding: 24px 28px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    text-align: left;
+    font-family: 'Space Grotesk', 'Consolas', 'Menlo', monospace;
+    font-size: 14px;
+    line-height: 1.75;
+    overflow: hidden;
+}
+
+.code-frame::before {
+    content: attr(data-file);
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted, #8b8b9e);
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.code-frame pre {
+    margin: 0;
+    white-space: pre;
+    overflow-x: auto;
+    color: #e0e0f0;
+}
+/* ---- Подсветка синтаксиса Java ---- */
+.code-frame .jv-kw   { color: #7c5cff; font-weight: 700; } /* public, class, static, void */
+.code-frame .jv-type { color: #00d4ff; font-weight: 600; } /* String, int, Scanner */
+.code-frame .jv-fn   { color: #ff6bcb; }                    /* println, nextLine, main */
+.code-frame .jv-str  { color: #00ffa3; }                    /* строки */
+.code-frame .jv-num  { color: #ffb800; }                    /* числа */
+.code-frame .jv-cmt  { color: #5a5a6e; font-style: italic; } /* // комментарии */
+.code-frame .jv-ann  { color: #ffb800; }  
+.code-frame--java::before { content: 'Program.java'; }                  /* аннотации @Override */
+/* ---- Подсветка синтаксиса Python ---- */
+.code-frame .py-kw  { color: #7c5cff; font-weight: 700; } /* def, if, else, return */
+.code-frame .py-fn  { color: #ff6bcb; }                    /* print, input */
+.code-frame .py-str { color: #00ffa3; }                    /* строки */
+.code-frame .py-num { color: #ffb800; }                    /* числа */
+.code-frame .py-cmt { color: #5a5a6e; font-style: italic; } /* # комментарии */
+/* Подсветка синтаксиса Паскаля */
+.code-frame--py::before { content: 'program.py'; }
+.code-frame .kw   { color: #7c5cff; font-weight: 700; }   /* program, var, begin, end */
+.code-frame .type { color: #00d4ff; font-weight: 600; }   /* integer, string */
+.code-frame .str  { color: #00ffa3; }                     /* строки в кавычках */
+.code-frame .num  { color: #ffb800; }                     /* числа */
+.code-frame .cmt  { color: #5a5a6e; font-style: italic; } /* комментарии */
+.code-frame .fn   { color: #ff6bcb; }                     /* writeln, readln */
+    </style>
+</head>
+<body>
+    <!-- Анимированный фон -->
+    <div class="bg-gradient"></div>
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-mark">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <span class="logo-text">Алгоритмы<em>Программирование</em></span>
+            </a>
+
+            <div class="header-actions">
+                
+            </div>
+        </div>
+    </header>
+
+    <!-- Навигация -->
+    <nav class="navigation">
+        <div class="container nav-inner">
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Главная</a></li>
+                <li><a href="vvod.html" class="nav-link active">Ввод и вывод</a></li>
+                <li><a href="yslovia.html" class="nav-link">Условия</a></li>
+                <li><a href="cicili.html" class="nav-link">Циклы</a></li>
+                <li><a href="recyrsia.html" class="nav-link">Рекурсия</a></li>
+                
+                        <li><button class="theme-btn" id="themeBtn">🌙 Тёмная тема</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Основной контент -->
+    <main class="main">
+        <div class="container">
+<h1 class="lesson-title">Простая программа. Что получаем на входе, - то и на выходе</h1>
+<p class="hint">
+  <p class="hint" style="color:#333333;">Переместите <b style="color:#2c3e50;">любой</b> круг в зону для проверки</p>
+</p>
+
+<div class="playground playground--sm" id="playground">
+
+  <!-- Три цветных кружка -->
+  <div class="circle red"   id="c-red"   data-color="#e63333"></div>
+  <div class="circle blue"  id="c-blue"  data-color="#3355e6"></div>
+  <div class="circle green" id="c-green" data-color="#33e666"></div>
+
+  <!-- Зона + индикатор -->
+  <div class="targets-row">
+    <div class="zone" id="zone"></div>
+    <div class="indicator" id="indicator"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const playground = document.getElementById('playground');
+  const zone       = document.getElementById('zone');
+  const indicator  = document.getElementById('indicator');
+  const red        = document.getElementById('c-red');
+  const blue       = document.getElementById('c-blue');
+  const green      = document.getElementById('c-green');
+  const circles    = [red, blue, green];
+
+  let drag = null;
+
+  /* ---------- Начальная раскладка ----------
+     Раскладываем кружки и запоминаем их домашние координаты
+     (dataset.hx, dataset.hy), чтобы можно было вернуть. */
+ function layoutInitial() {
+  const h = playground.clientHeight;
+  const size = circles[0].offsetWidth;
+  const gap = size * 0.8;
+  const startX = 14;                 // отступ слева
+  const y = (h - size) / 2;          // по вертикальному центру
+
+  circles.forEach(function (c, i) {
+    const x = startX + i * (size + gap);
+    c.style.left = x + 'px';
+    c.style.top  = y + 'px';
+    c.dataset.hx = x;
+    c.dataset.hy = y;
+    c._zone = null;
+  });
+
+  zone._occupant = null;
+}
+
+  /* ---------- Кружок внутри зоны? ---------- */
+  function isInsideZone(el) {
+    const r1 = el.getBoundingClientRect();
+    const r2 = zone.getBoundingClientRect();
+    const cx = r1.left + r1.width  / 2;
+    const cy = r1.top  + r1.height / 2;
+    const zx = r2.left + r2.width  / 2;
+    const zy = r2.top  + r2.height / 2;
+    return Math.hypot(cx - zx, cy - zy) < r2.width / 2;
+  }
+
+  /* ---------- Вернуть кружок домой ---------- */
+  function returnHome(circle) {
+    circle.style.left = circle.dataset.hx + 'px';
+    circle.style.top  = circle.dataset.hy + 'px';
+  }
+
+  /* ---------- Примагнитить в центр зоны ---------- */
+  function snapToZone(circle) {
+    const playRect = playground.getBoundingClientRect();
+    const zr = zone.getBoundingClientRect();
+    const size = circle.offsetWidth;
+    const zcx = zr.left + zr.width  / 2 - playRect.left;
+    const zcy = zr.top  + zr.height / 2 - playRect.top;
+    circle.style.left = (zcx - size / 2) + 'px';
+    circle.style.top  = (zcy - size / 2) + 'px';
+  }
+
+  /* ---------- Индикатор принимает цвет ---------- */
+  function setIndicatorColor(color) {
+    indicator.style.background   = color;
+    indicator.style.borderColor  = color;
+    indicator.style.boxShadow    =
+      '0 0 40px ' + color + ', 0 0 80px ' + color + '80, ' +
+      'inset 0 0 24px rgba(255,255,255,0.25)';
+    indicator.classList.add('active');
+  }
+
+  /* ---------- Сброс индикатора в исходный чёрный ---------- */
+  function resetIndicator() {
+    indicator.style.background  = '#000';
+    indicator.style.borderColor = 'rgba(255,255,255,0.12)';
+    indicator.style.boxShadow   = 'inset 0 0 24px rgba(255,255,255,0.04)';
+    indicator.classList.remove('active');
+  }
+
+  /* ---------- Обновление состояния после drop ---------- */
+  function updateIndicator() {
+    if (zone._occupant) {
+      setIndicatorColor(zone._occupant.dataset.color);
+    } else {
+      resetIndicator();
+    }
+    zone.classList.toggle('filled', !!zone._occupant);
+  }
+
+  /* ---------- Обработчики перетаскивания ---------- */
+  function onDown(e) {
+    e.preventDefault();
+    const el = e.currentTarget;
+    const rect = el.getBoundingClientRect();
+    const playRect = playground.getBoundingClientRect();
+
+    drag = {
+      el: el,
+      offsetX: e.clientX - rect.left,
+      offsetY: e.clientY - rect.top,
+      playRect: playRect
+    };
+
+    el.setPointerCapture(e.pointerId);
+    el.classList.add('dragging');
+  }
+
+  function onMove(e) {
+    if (!drag || drag.el !== e.currentTarget) return;
+    const el = drag.el;
+    const size = el.offsetWidth;
+
+    let x = e.clientX - drag.playRect.left - drag.offsetX;
+    let y = e.clientY - drag.playRect.top  - drag.offsetY;
+
+    x = Math.max(0, Math.min(drag.playRect.width  - size, x));
+    y = Math.max(0, Math.min(drag.playRect.height - size, y));
+
+    el.style.left = x + 'px';
+    el.style.top  = y + 'px';
+
+    if (isInsideZone(el)) zone.classList.add('hover');
+    else                  zone.classList.remove('hover');
+  }
+
+  function onUp(e) {
+    if (!drag || drag.el !== e.currentTarget) return;
+    const el = drag.el;
+
+    el.classList.remove('dragging');
+    try { el.releasePointerCapture(e.pointerId); } catch (_) {}
+    zone.classList.remove('hover');
+
+    const wasIn = el._zone;
+
+    if (isInsideZone(el)) {
+      /* В зоне уже сидит другой кружок — вернуть его домой */
+      const occ = zone._occupant;
+      if (occ && occ !== el) {
+        returnHome(occ);
+        occ._zone = null;
+      }
+
+      /* Новый кружок занимает зону */
+      zone._occupant = el;
+      el._zone = zone;
+      snapToZone(el);
+
+      zone.classList.add('flash');
+      setTimeout(function () { zone.classList.remove('flash'); }, 500);
+    } else {
+      /* Кружок упал вне зоны.
+         Если он был в зоне — освобождаем её. */
+      if (wasIn === zone) {
+        zone._occupant = null;
+        el._zone = null;
+      }
+    }
+
+    updateIndicator();
+    drag = null;
+  }
+
+  /* ---------- Навешиваем события ---------- */
+  circles.forEach(function (el) {
+    el.addEventListener('pointerdown', onDown);
+    el.addEventListener('pointermove', onMove);
+    el.addEventListener('pointerup', onUp);
+    el.addEventListener('pointercancel', onUp);
+  });
+
+  /* ---------- Ресайз: держим кружки в границах поля ---------- */
+  window.addEventListener('resize', function () {
+    const playRect = playground.getBoundingClientRect();
+    circles.forEach(function (el) {
+      const size = el.offsetWidth;
+      let x = parseFloat(el.style.left) || 0;
+      let y = parseFloat(el.style.top)  || 0;
+      x = Math.max(0, Math.min(playRect.width  - size, x));
+      y = Math.max(0, Math.min(playRect.height - size, y));
+      el.style.left = x + 'px';
+      el.style.top  = y + 'px';
+    });
+  });
+
+  layoutInitial();
+  updateIndicator();
+})();
+</script>
+<!-- Рамка с кодом на Паскале -->
+<div class="code-frame" data-file="Программа на языке Pascal">
+<pre><span class="kw">Program</span> VvodVivod;
+
+<span class="cmt">{ Программа: что на входе — то и на выходе }</span>
+
+<span class="kw">var</span>
+  c : <span class="type">string</span>;  <span class="cmt">{ вход: цвет кружка }</span>
+
+<span class="kw">begin</span>
+  <span class="fn">readln</span>(c);       <span class="cmt">{ читаем вход }</span>
+  <span class="fn">writeln</span>(c);      <span class="cmt">{ выводим то же самое }</span>
+<span class="kw">end</span>.</pre>
+</div>
+<!-- Рамка с кодом на Python -->
+<div class="code-frame" data-file="Программа на языке Python">
+<pre><span class="py-cmt"># Программа: что на входе — то и на выходе</span>
+
+<span class="py-kw">def</span> main():
+    c = <span class="py-fn">input</span>()          <span class="py-cmt"># читаем вход</span>
+    <span class="py-fn">print</span>(c)            <span class="py-cmt"># выводим то же самое</span>
+
+<span class="py-kw">if</span> __name__ == <span class="py-str">"__main__"</span>:
+    main()</pre>
+</div>
+<!-- Рамка с кодом на Java -->
+<div class="code-frame" data-file="Программа на языке Java">
+<pre><span class="jv-cmt">// Программа: что на входе — то и на выходе</span>
+<span class="jv-kw">import</span> java.util.Scanner;
+
+<span class="jv-kw">public class</span> Program {
+    <span class="jv-kw">public static void</span> main(<span class="jv-type">String</span>[] args) {
+        <span class="jv-type">Scanner</span> sc = <span class="jv-kw">new</span> <span class="jv-type">Scanner</span>(System.in);
+        <span class="jv-type">String</span> c = sc.<span class="jv-fn">nextLine</span>();   <span class="jv-cmt">// читаем вход</span>
+        System.out.<span class="jv-fn">println</span>(c);         <span class="jv-cmt">// выводим то же самое</span>
+        sc.<span class="jv-fn">close</span>();
+    }
+}</pre>
+</div>
+            <!-- Hero -->
+            <section class="hero">
+                <div class="hero-actions">
+                    <form action="yslovia.html"><button class="btn btn-primary btn-lg">
+                        Далее
+                        <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+                            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button></form>
+                </div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="logo-mark">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M4 6h16M4 12h16M4 18h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <span class="logo-text">Алгоритмы<em>Программирование</em></span>
+                    </div>
+                    <p>Урок информатики для школьников</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><a href="vvod.html">Ввод и вывод</a></li>
+                        <li><a href="yslovia.html">Условия</a></li>
+                        <li><a href="cicili.html">Циклы</a></li>
+                        <li><a href="recyrsia.html">Рекурсия</a></li>
+                        <li><a href="vidi.html">Виды алгоритмических конструкций</a></li>
+                        <li><a href="metodi.html">Методы разработки алгоритмов</a></li>
+                        <li><a href="prog.html">Программы и ПО</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Контакты</h4>
+                    <ul>
+                        <li><a href="#">MAX</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+<script src="script.js"></script>
+</body>
+</html>
